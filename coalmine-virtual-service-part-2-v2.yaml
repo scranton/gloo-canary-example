@@ -1,0 +1,46 @@
+apiVersion: gateway.solo.io/v1
+kind: VirtualService
+metadata:
+  name: coalmine
+  namespace: gloo-system
+spec:
+  displayName: coalmine
+  virtualHost:
+    domains:
+    - '*'
+    name: gloo-system.coalmine
+    routes:
+    - matcher:
+        prefix: /findPets
+      routeAction:
+        single:
+          destinationSpec:
+            rest:
+              functionName: findPets
+              parameters: {}
+          upstream:
+            name: default-petstore-v2-8080
+            namespace: gloo-system
+    - matcher:
+        prefix: /findPetWithId
+      routeAction:
+        single:
+          destinationSpec:
+            rest:
+              functionName: findPetById
+              parameters:
+                headers:
+                  :path: /findPetWithId/{id}
+          upstream:
+            name: default-petstore-v1-8080
+            namespace: gloo-system
+    - matcher:
+        prefix: /petstore
+      routeAction:
+        single:
+          upstream:
+            name: default-petstore-v1-8080
+            namespace: gloo-system
+      routePlugins:
+        prefixRewrite:
+          prefixRewrite: /api/pets
