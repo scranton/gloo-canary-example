@@ -1,2 +1,5 @@
-# gloo-canary-example
-Example files for Gloo Canary Release blogs
+These are supporting files for the 3 part blog series on using Gloo to help with Canary Releases
+
+* In part 1, [Routing with Gloo Function Gateway](https://scott.cranton.com/function-routing-with-gloo.html), you learned how to setup Gloo, and using Gloo to setup some initial function level routing rules.
+* In part 2, [Canary Deployments with Gloo Function Gateway](https://scott.cranton.com/canary-deployments-with-solo.html), you learned how to setup a conditional routing rule that routed requests to the new version of our service only when a request header was present with the correct value.
+* In part 3, [Canary Deployments with Gloo Function Gateway using Weighted Destinations](https://scott.cranton.com/canary-deployments-with-weighted-routes.html), we used weighted destinations to route a percentage of request traffic to individual upstream services.
